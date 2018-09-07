@@ -1,18 +1,17 @@
 //node server/server.js  
-//localhost:3000/todos
+//no postman »»» localhost:3000/todos
 console.log("777 node server/server.js !!!!!!!!!!!!!!");
-
+//......
 var express = require('express');
 var bodyParser = require('body-parser');
-
+//......
 var { mongoose } = require('./db/mongoose');
 var { Todo } = require('./models/todo');
 var { User } = require('./models/user');
 //...... 
 var app = express();
-
 app.use( bodyParser.json() );
-
+//......
 app.post('/todos', ( req, res ) => {
 	console.log( 'req.body:::' + req.body );
 	var todo = new Todo({
@@ -28,7 +27,19 @@ app.post('/todos', ( req, res ) => {
 	});
 	//......
 });
-
+//...... 07 75
+app.get('/todos', ( req, res ) => {
+	Todo.find().then( (todos) => {  
+		console.log("node server/server.js  app.get('/todos'...  ***** ***** SUCCESS");
+		//07 75 ~2.10  |  {todos} »»» usa-se um objecto porque ao usar um array (todos), 
+		//isso limita utilizações futuras...  	
+		res.send({todos});
+	},  (e) => { 
+		console.log("node server/server.js  app.get('/todos'...  ***** ***** ERROR");
+		res.status(400).send(e);
+	});
+});
+//......
 app.listen( 3000, () => {
 	console.log('Started on port 3000');
 });
