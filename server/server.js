@@ -1,6 +1,6 @@
 //node server/server.js  
 //no postman »»» localhost:3000/todos
-console.log("777 node server/server.js !!!!!!!!!!!!!!");
+console.log("node server/server.js !!!!!!!!!!!!!!");
 //......
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -13,7 +13,8 @@ var app = express();
 app.use( bodyParser.json() );
 //......
 app.post('/todos', ( req, res ) => {
-	console.log( 'req.body:::' + req.body );
+	console.log( 'req.body:::' + req.body.text );
+	//......
 	var todo = new Todo({
 		text: req.body.text
 	});
@@ -30,7 +31,8 @@ app.post('/todos', ( req, res ) => {
 //...... 07 75
 app.get('/todos', ( req, res ) => {
 	Todo.find().then( (todos) => {  
-		console.log("node server/server.js  app.get('/todos'...  ***** ***** SUCCESS");
+		console.log("node server/server.js  app.get(/todos...  ***** ***** SUCCESS");
+		//console.log("node server/server.js  app.get(/todos:::" + todos);
 		//07 75 ~2.10  |  {todos} »»» usa-se um objecto porque ao usar um array (todos), 
 		//isso limita utilizações futuras...  	
 		res.send({todos});
